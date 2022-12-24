@@ -11,6 +11,7 @@ export default class Book {
       return 0;
     }
     books.forEach((book) => Book.addBookToList(book));
+    return 0;
   }
 
   static addBookToList(book) {
@@ -51,7 +52,7 @@ export default class Book {
     const books = Book.getBooks();
     const m = document.querySelectorAll('tr');
     let counter = 0;
-    for (let i = counter; i < m.length; i++) {
+    for (let i = counter; i < m.length; i += 1) {
       if (m[i] === author) {
         counter = i;
         break;
