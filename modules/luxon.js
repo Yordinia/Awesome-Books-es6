@@ -22,7 +22,6 @@
 /* eslint-disable max-len */
 /* eslint-disable class-methods-use-this */
 /* eslint-disable max-classes-per-file */
-// these aren't really private, but nor are they really useful to document
 
 /**
  * @private
