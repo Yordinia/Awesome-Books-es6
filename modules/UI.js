@@ -1,49 +1,63 @@
-import { books } from "./modules";
+export default class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
 
-const title = document.querySelector('.title');
-const author = document.querySelector('.author');
-
-class Books {
-    constructor(title, author) {
-      this.title = title;
-      this.author = author;
-    }
-  
-    static addBook(e) {
-      e.preventDefault();
-  
-      const book = new Books(title.value, author.value);
-  
-      books.push(book);
-      localStorage.setItem('books-list', JSON.stringify(books));
-  
-      Books.display();
-      document.querySelector('form').reset();
-      title.focus();
-    }
-  
-    static display() {
-      let i = 0;
-      tbody.innerHTML = '';
-      if (books.length !== 0) {
-        books.forEach((book) => {
-          tbody.innerHTML += `
-        <tr class='book'>
-          <td><strong>"${book.title}"</strong> by <em>${book.author}</em></td>
-          <td><button onclick="Books.remove(${i})" class='btn btn-outline-primary'> Remove </button> </td> 
-        </tr>
-        `;
-          i += 1;
-        });
-      }
+  static displayBooks() {
+    const books = Book.getBooks();
+    if (books.length === 0) {
+      document.querySelector('#book-list').innerText = 'Oh, there are no books so far';
       return 0;
     }
-  
-    static remove(i) {
-      const x = document.querySelectorAll('.book')[i];
-      tbody.removeChild(x);
-      books.splice(i, 1);
-      localStorage.setItem('books-list', JSON.stringify(books));
-      Books.display();
+    books.forEach((book) => Book.addBookToList(book));
+  }
+
+  static addBookToList(book) {
+    const list = document.querySelector('#book-list');
+
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+      <td>"${book.title}" by ${book.author}</td>
+      <td><a href="#" class="btn btn-outline-primary delete">remove</a></td>
+      `;
+
+    list.appendChild(row);
+  }
+
+  static deleteBook(el) {
+    if (el.classList.contains('delete')) {
+      el.parentElement.parentElement.remove();
     }
   }
+
+  static getBooks() {
+    const books = JSON.parse(localStorage.getItem('books')) || [{
+      title: 'The Great Gatsby', author: 'F. Scott Fitzgerald',
+    }, {
+      title: 'Jane Eyre', author: 'Charlotte Bronte',
+    }];
+    return books;
+  }
+
+  static addBook(book) {
+    const books = Book.getBooks();
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  static removeBook(author) {
+    const books = Book.getBooks();
+    const m = document.querySelectorAll('tr');
+    let counter = 0;
+    for (let i = counter; i < m.length; i++) {
+      if (m[i] === author) {
+        counter = i;
+        break;
+      }
+    }
+    books.splice(counter, 1);
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+}

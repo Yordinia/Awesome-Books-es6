@@ -1,54 +1,31 @@
-/* eslint-disable no-unused-vars */
-
 import Date from './modules/date.js';
-import Books from './modules/UI.js';
+import Book from './modules/UI.js';
+import * as module from './modules/collection.js';
 
-Date();
+window.addEventListener('load', Date());
 
-const button = document.querySelector('.Button');
-const title = document.querySelector('.title');
-const author = document.querySelector('.author');
-const booksList = document.querySelector('.books');
-const listNav = document.querySelector('.listNav');
-const addNav = document.querySelector('.addNav');
-const contactNav = document.querySelector('.contactNav');
-const listSec = document.querySelector('.for-list');
-const addSec = document.querySelector('.for-add');
-const contactSec = document.querySelector('.for-contact');
+window.addEventListener('load', module.onload);
 
-const tbody = document.createElement('tbody');
-booksList.appendChild(tbody);
+document.addEventListener('DOMContentLoaded', Book.displayBooks);
 
+module.bookList.addEventListener('click', module.listCall);
+module.contact.addEventListener('click', module.contactCall);
+module.addBook.addEventListener('click', module.addBookCall);
 
-listSec.style.display = 'block';
-addSec.style.display = 'none';
-contactSec.style.display = 'none';
+module.form.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-listNav.addEventListener('click', () => {
-  listSec.style.display = 'block';
-  addSec.style.display = 'none';
-  contactSec.style.display = 'none';
-  listNav.classList.add('nav-links');
-  addNav.classList.remove('nav-links');
-  contactNav.classList.remove('nav-links');
-});
-addNav.addEventListener('click', () => {
-  addSec.style.display = 'block';
-  listSec.style.display = 'none';
-  contactSec.style.display = 'none';
-  listNav.classList.remove('nav-links');
-  addNav.classList.add('nav-links');
-  contactNav.classList.remove('nav-links');
-  title.focus();
-});
-contactNav.addEventListener('click', () => {
-  contactSec.style.display = 'block';
-  listSec.style.display = 'none';
-  addSec.style.display = 'none';
-  listNav.classList.remove('nav-links');
-  addNav.classList.remove('nav-links');
-  contactNav.classList.add('nav-links');
+  const book = new Book(module.title.value, module.author.value);
+
+  Book.addBookToList(book);
+
+  Book.addBook(book);
+
+  module.form.reset();
+  module.title.focus();
 });
 
-Books.display();
-button.addEventListener('click', Books.addBook);
+document.querySelector('#book-list').addEventListener('click', (e) => {
+  Book.removeBook(e.target.parentElement.parentElement);
+  Book.deleteBook(e.target);
+});
