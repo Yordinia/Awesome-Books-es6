@@ -18,8 +18,8 @@ module.form.addEventListener('submit', (e) => {
   const book = new Book(module.title.value, module.author.value);
 
   Book.addBookToList(book);
-
   Book.addBook(book);
+  Book.checkEmpty();
 
   module.form.reset();
   module.title.focus();

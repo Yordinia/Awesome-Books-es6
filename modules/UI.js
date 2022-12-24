@@ -6,12 +6,9 @@ export default class Book {
 
   static displayBooks() {
     const books = Book.getBooks();
-    if (books.length === 0) {
-      document.querySelector('#book-list').innerText = 'Oh, there are no books so far';
-      return 0;
-    }
+    if(Book.checkEmpty()) return;
     books.forEach((book) => Book.addBookToList(book));
-    return 0;
+    return;
   }
 
   static addBookToList(book) {
@@ -48,17 +45,31 @@ export default class Book {
     localStorage.setItem('books', JSON.stringify(books));
   }
 
-  static removeBook(author) {
+  static removeBook(removed) {
     const books = Book.getBooks();
     const m = document.querySelectorAll('tr');
     let counter = 0;
-    for (let i = counter; i < m.length; i += 1) {
-      if (m[i] === author) {
+    for (let i = counter; i < m.length; i+= 1) {
+      if (m[i] === removed) {
         counter = i;
         break;
       }
     }
     books.splice(counter, 1);
     localStorage.setItem('books', JSON.stringify(books));
+    Book.checkEmpty();
   }
+
+  static checkEmpty(){
+    const books = Book.getBooks();
+    if (books.length === 0) {
+      const isEmptyMessage = document.createElement('div');
+      isEmptyMessage.innerText = 'Add books to your list, there are no books to display';
+      document.querySelector('#book-list').appendChild(isEmptyMessage);
+      return true;
+    }
+    else {
+      if(document.querySelector('#book-list div')) document.querySelector('#book-list').removeChild(document.querySelector('#book-list div'));
+      return false;
+  }}
 }
