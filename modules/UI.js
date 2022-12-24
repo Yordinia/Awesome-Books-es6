@@ -6,9 +6,8 @@ export default class Book {
 
   static displayBooks() {
     const books = Book.getBooks();
-    if(Book.checkEmpty()) return;
+    if (Book.checkEmpty()) return;
     books.forEach((book) => Book.addBookToList(book));
-    return;
   }
 
   static addBookToList(book) {
@@ -49,7 +48,7 @@ export default class Book {
     const books = Book.getBooks();
     const m = document.querySelectorAll('tr');
     let counter = 0;
-    for (let i = counter; i < m.length; i+= 1) {
+    for (let i = counter; i < m.length; i += 1) {
       if (m[i] === removed) {
         counter = i;
         break;
@@ -60,7 +59,7 @@ export default class Book {
     Book.checkEmpty();
   }
 
-  static checkEmpty(){
+  static checkEmpty() {
     const books = Book.getBooks();
     if (books.length === 0) {
       const isEmptyMessage = document.createElement('div');
@@ -68,8 +67,8 @@ export default class Book {
       document.querySelector('#book-list').appendChild(isEmptyMessage);
       return true;
     }
-    else {
-      if(document.querySelector('#book-list div')) document.querySelector('#book-list').removeChild(document.querySelector('#book-list div'));
-      return false;
-  }}
+
+    if (document.querySelector('#book-list div')) document.querySelector('#book-list').removeChild(document.querySelector('#book-list div'));
+    return false;
+  }
 }
