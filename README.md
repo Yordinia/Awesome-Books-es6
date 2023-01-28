@@ -84,7 +84,7 @@ Clone this repository to your desired folder:
 
 
 ```sh
-  git clone https://github.com/kazim110/Awesome-Books.git
+  git clone https://github.com/yordinia/Awesome-Books.git
 ```
 
 
@@ -103,15 +103,9 @@ You can deploy this project using
 
 ## 👥 Authors 
 <a name="authors"></a>
-
-👤 **Kamran Ahmad**
+ 
 👤 **Yordanos Temesgen**
-
-__Kamran Ahmad__
-- GitHub: [@githubhandle](https://github.com/kamranahmad123) 
-- Twitter: [@twitterhandle](https://twitter.com/handel)
-- LinkedIn: [LinkedIn](https://www.linkedin.com/in/kamran-khan-9a293b113/)
-
+ 
 __Yordanos Temesgen__
 - GitHub: [@yordinia](https://github.com/yordinia)
 - Twitter: [@yordinia](https://twitter.com/yordinia)
@@ -163,7 +157,7 @@ If you like this project give me a star.
 
 ## 📝 License <a name="license"></a>
 
-This project is [MIT](https://github.com/kazim110/Awesome-Books/blob/add-remove-books/LICENSE) licensed.
+This project is [MIT](https://github.com/yordinia/Awesome-Books/blob/add-remove-books/LICENSE) licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
